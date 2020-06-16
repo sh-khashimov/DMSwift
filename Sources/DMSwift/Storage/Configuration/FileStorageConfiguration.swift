@@ -17,9 +17,9 @@ public protocol FileStorageConfiguration {
     /// The location of the directory in the Application sandbox.
     var searchPathDirectory: FileManager.SearchPathDirectory { get set }
 
-    /// Used to indicate whether or not, should create  and store a Filespec data object.
+    /// Used to indicate whether to create and store a Filespec data object.
     var createFilespec: Bool { get set  }
 
-    /// Used to indicate whether or not, should use hashed (MD5) URL path for filename.
+    /// Used to indicate whether to use hashed (MD5) URL path for filename.
     var useHashedPathForFilename: Bool { get set }
 }

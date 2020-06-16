@@ -15,7 +15,7 @@ public extension FileManager {
     /// - Throws: `FileStorageError.fileNotFound`.
     /// - Returns: Return `FileAttributes` object.
     func fileAttributes(at url: URL) throws -> FileAttributes {
-        guard let attributes = try? self.attributesOfItem(atPath: url.path) else { throw FileStorageError.fileNotFound }
+        guard let attributes = try? self.attributesOfItem(atPath: url.path) else { throw FileStorageError.fileNotFound(path: url.path) }
         let readOnly = (attributes[.appendOnly] as? NSNumber)?.boolValue
         let creationDate = attributes[.creationDate] as? Date
         let modificationDate = attributes[.modificationDate] as? Date
@@ -27,10 +27,10 @@ public extension FileManager {
 
     /// Search at a specified **directory** and return found objects.
     /// - Parameter directory: Search directory.
-    /// - Parameter shouldEnumerateDirectories: Whether or not, should enumerate subdirectories.
-    /// - Parameter includeDirectories: Whether or not, should include directories.
-    /// - Parameter includeFiles: Whether or not, should include files.
-    /// - Parameter includeHiddenFiles: Whether or not, should include hidden files.
+    /// - Parameter shouldEnumerateDirectories: Whether subdirectories should be enumerated.
+    /// - Parameter includeDirectories: Whether directories should be included.
+    /// - Parameter includeFiles: Whether files should be included.
+    /// - Parameter includeHiddenFiles: Whether hidden files should be included.
     /// - Throws: `FileStorageError.invalidPath` - specified directory not found.
     /// - Returns: Return list of `URL`, that exists at a specified directory.
     func enumerate(directory: URL, enumerateDirectories: Bool = true, includeDirectories: Bool = false, includeFiles: Bool = true, includeHiddenFiles: Bool = false) -> [URL] {

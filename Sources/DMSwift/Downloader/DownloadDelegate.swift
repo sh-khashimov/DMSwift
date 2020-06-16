@@ -21,16 +21,16 @@ protocol DownloadDelegate: class {
     ///   - downloadedSize: Total downloaded size.
     ///   - receivedSize: New received size.
     ///   - fileSize: Total file size.
-    func updated(_ progress: DownloadProgressData)
+    func updated(_ progress: DMSwiftTypealias.Download.ProgressData)
 
     /// File download task completed.
     /// - Parameters:
     ///   - fileLocation: File location on the device storage.
     ///   - url: File remote location.
     ///   - error: Error.
-    func completed(_ data: DownloadedFileData)
+    func completed(_ data: DMSwiftTypealias.Download.FileData)
 
     /// File saved to the device storage.
     /// - Parameter fileData: File location on the device storage, filename and extension.
-    func fileData(_ fileData: SavedFileData)
+    func fileData(_ fileData: DMSwiftTypealias.Download.SavedFileData)
 }

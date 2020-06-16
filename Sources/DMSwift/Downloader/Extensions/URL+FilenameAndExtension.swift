@@ -11,9 +11,9 @@ import Foundation
 public extension URL {
 
     /// Creates `FilenameAlias` from `URL` object.
-    /// - Parameter UseHashedPathForFilename: Whether or not should use MD5 hash of `URL` path for file name.
+    /// - Parameter UseHashedPathForFilename: Whether to use the MD5 hash of `URL` path for a filename.
     /// - Returns: Return file remote located name, file name and extension.
-    func filenameAndExtention(useHashedPathForFilename: Bool) -> FilenameAlias {
+    func filenameAndExtention(useHashedPathForFilename: Bool) -> DMSwiftTypealias.Storage.Filename {
         guard self.pathComponents.count > 0 else { return (name: nil, filename: nil, extension: nil) }
         var unsafeName = self.deletingPathExtension().lastPathComponent
         if unsafeName.hasPrefix("/") {

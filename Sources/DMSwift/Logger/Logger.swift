@@ -21,6 +21,7 @@ class Logger: Logging {
     func log(with message: String, level: LogLevel) {
         guard logLevel.isLogLevelSatisfied(with: level) else { return }
         print("\(message)")
+        print("-------------")
     }
 
     private init() { }

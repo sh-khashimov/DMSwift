@@ -31,20 +31,22 @@ class DownloadOperation: DefaultOperation {
         return true
     }
 
-    var onReciveFileSize: ((_ fileSize: Int64) -> Void)? {
+    /// Informs when receiving a new data size.
+    var onReceiveFileSize: ((_ fileSize: Int64) -> Void)? {
         didSet {
-            downloadTask?.onReciveFileSize = self.onReciveFileSize
+            downloadTask?.onReciveFileSize = self.onReceiveFileSize
         }
     }
 
-    var onUpdateProgress: ((DownloadProgressData) -> Void)? {
+    /// Informs on changes in download  progress.
+    var onUpdateProgress: ((DMSwiftTypealias.Download.ProgressData) -> Void)? {
         didSet {
             downloadTask?.onUpdateProgress = self.onUpdateProgress
         }
     }
 
     /// The file data saved.
-    var onFileDataChange: ((_ fileData: SavedFileData?) -> Void)? {
+    var onFileDataChange: ((_ fileData: DMSwiftTypealias.Download.SavedFileData?) -> Void)? {
         didSet {
             downloadTask?.onFileDataChange = self.onFileDataChange
         }
@@ -61,7 +63,7 @@ class DownloadOperation: DefaultOperation {
     ///   - timeoutIntervalForRequest: Request timeout interval.
     ///   - completionHandler: Complete handler.
     convenience init(_ url: URLTestable, fileStorage: FileStorage, delegate: DownloadDelegate? = nil, downloadType: URLSessionTaskType, timeoutIntervalForRequest: TimeInterval,
-                     _ completionHandler: ((DownloadedFileData) -> Void)? = nil) {
+                     _ completionHandler: ((DMSwiftTypealias.Download.FileData) -> Void)? = nil) {
 
         self.init(url.urlRequest, fileStorage: fileStorage, delegate: delegate, downloadType: downloadType, timeoutIntervalForRequest: timeoutIntervalForRequest, completionHandler)
     }
@@ -75,7 +77,7 @@ class DownloadOperation: DefaultOperation {
     ///   - timeoutIntervalForRequest: Request timeout interval.
     ///   - completionHandler: Complete handler.
     init(_ request: URLRequestTestable, fileStorage: FileStorage, delegate: DownloadDelegate? = nil, downloadType: URLSessionTaskType, timeoutIntervalForRequest: TimeInterval,
-         _ completionHandler: ((DownloadedFileData) -> Void)? = nil) {
+         _ completionHandler: ((DMSwiftTypealias.Download.FileData) -> Void)? = nil) {
 
         downloadTask = DownloadTask(request, fileStorage: fileStorage, delegate: delegate, downloadType: downloadType, timeoutIntervalForRequest: timeoutIntervalForRequest)
 

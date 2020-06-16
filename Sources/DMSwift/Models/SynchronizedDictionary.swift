@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SynchronizedDictionary<KeyType: Hashable, ValueType> {
+class SynchronizedDictionary<KeyType: Hashable, ValueType> {
     private var dictionary: [KeyType:ValueType] = [:]
     private let queue = DispatchQueue(label: "com.downloader.SynchronizedDictionaryAccess", attributes: .concurrent)
 

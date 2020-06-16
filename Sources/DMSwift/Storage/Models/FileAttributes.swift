@@ -12,7 +12,7 @@ import Foundation
 /// Describes the attributes of the file
 public struct FileAttributes {
 
-    /// Whether or not, file is read only.
+    /// Whether the file is read-only.
     public var readOnly: Bool?
 
     /// File created date.

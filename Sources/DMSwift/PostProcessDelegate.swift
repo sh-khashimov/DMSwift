@@ -11,20 +11,20 @@ import Foundation
 /// Post-process delegate
 public protocol PostProcessDelegate: class {
 
-    /// Reports when post-processing operations started.
+    /// Informs when post-processing operations started.
     func postProcessStarted()
 
-    /// Reports when all post-processing operations finished.
+    /// Informs when all post-processing operations finished successfully.
     func postProcessDidComplete()
 
-    /// Reports on changes in post-process operations count progress.
+    /// Informs on changes in post-process operations count progress.
     /// - Parameters:
     ///   - progress: Progress.
     ///   - finishedTaskCount: Finished task count.
     ///   - taskCount: Total running task count.
     func postProcessDidUpdate(progress: Float, finishedTaskCount: Int64, taskCount: Int64)
 
-    /// Reports when post-processing operations finished and some of them have errors.
+    /// Informs when post-processing operations finished and some of them have errors.
     /// - Parameter tasks: Failed to complete tasks.
-    func postProcessDidCompletedWithError(tasks: [PostProcessFailedTask])
+    func postProcessDidCompletedWithError(tasks: [DMSwiftTypealias.PostProcess.FailedTask])
 }

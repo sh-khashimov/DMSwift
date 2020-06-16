@@ -28,7 +28,7 @@ public extension FileReading {
         }
         let fileData = url.filenameAndExtention(useHashedPathForFilename: self.configuration.useHashedPathForFilename)
         guard let filename = fileData.filename
-            else { throw FileStorageError.invalidFileNameOrExtentision }
+            else { throw FileStorageError.invalidFileNameOrExtentision(path: url.path) }
         return try searchFile(withFilename: filename, fileExtention: fileData.extension, directortyURL: directortyURL).first!
     }
 
@@ -41,7 +41,7 @@ public extension FileReading {
     func searchFile(withFilename filename: String, fileExtention: String? = nil, directortyURL: URL? = nil) throws -> [URL] {
         let _directoryURL = directortyURL ?? self.directoryURL
         guard let enumerator = fileManager.enumerator(atPath: _directoryURL.path)
-            else { throw FileStorageError.invalidPath }
+            else { throw FileStorageError.invalidPath(path: _directoryURL.path) }
         var foundUrl: [URL] = []
         for case let _path as String in enumerator {
             guard _path.contains(filename) else { continue }
@@ -60,7 +60,7 @@ public extension FileReading {
         if foundUrl.count > 0 {
             return foundUrl
         }
-        throw FileStorageError.fileNotFound
+        throw FileStorageError.fileNotFound(path: nil)
     }
 
     /// Search file at a given directory or at `FileStorageManageable.directoryURL`, with given remote location of file **url**.
@@ -73,7 +73,7 @@ public extension FileReading {
     /// `FileStorageError.fileNotFound`
     ///  - Returns: `Data` representation of a file
     func fileData(at url: URL, atDirectory directortyURL: URL? = nil) throws -> Data? {
-        guard let fileLocation = try? searchFile(with: url, atDirectory: directortyURL) else { throw FileStorageError.fileNotFound }
+        guard let fileLocation = try? searchFile(with: url, atDirectory: directortyURL) else { throw FileStorageError.fileNotFound(path: url.path) }
         return fileData(fileLocation)
     }
 
@@ -96,7 +96,7 @@ public extension FileReading {
     func filespec(at url: URL, atDirectory directortyURL: URL? = nil) throws -> Filespec? {
         let _directoryURL = directortyURL ?? self.directoryURL
         let filename = url.absoluteString.MD5
-        return try filespec(withFilename: ".\(filename)", atDirectory: _directoryURL)
+        return try filespec(withFilename: filename, atDirectory: _directoryURL)
     }
 
     /// Search filespec object at a given directory or at `FileStorageManageable.directoryURL`, with given filename and file extension.
@@ -106,10 +106,10 @@ public extension FileReading {
     ///   - directortyURL: Directory `URL`.
     func filespec(withFilename filename: String, atDirectory directortyURL: URL? = nil) throws -> Filespec? {
         let _directoryURL = directortyURL ?? self.directoryURL
-        var fileUrl = _directoryURL.appendingPathComponent(filename)
+        var fileUrl = _directoryURL.appendingPathComponent(".\(filename)")
         let fileExtension = "json"
         fileUrl.appendPathExtension(fileExtension)
-        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound }
+        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound(path: fileUrl.path) }
         let data = fileManager.contents(atPath: fileUrl.path)!
         return Filespec(fromJsonData: data)
     }
@@ -146,8 +146,8 @@ public extension FileReading {
 
 
     /// List of files at a given directory or at `FileStorageManageable.directoryURL`.
-    /// - Parameter enumerateDirectories: Whether or not, should include subdirectories and their files.
-    /// - Parameter includeDirectories: Whether or not, should also return directories.
+    /// - Parameter enumerateDirectories: Whether subdirectories and their files should be included.
+    /// - Parameter includeDirectories: Whether directories should be also returned.
     /// - Parameter directortyURL: Search directory, if *nil*, `FileStorageManageable.directoryURL` will be used instead.
     /// - Throws: `FileStorageError.invalidPath`.
     ///  - Returns: List of directories `lastPathComponent`, as Array of `String`.

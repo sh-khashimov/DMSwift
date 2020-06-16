@@ -8,60 +8,65 @@
 
 import Foundation
 
-/// TODO: Write main description about library!
+/// DMSwift provides a simple and efficient way to download files.
+/// It can simultaneously download a large number of files,
+/// monitors the progress of downloading,
+/// concurrently post-process downloaded files,
+/// supports logging, has a flexible configuration and easy to use API.
 public class DMSwift {
 
     /// Download progress delegate.
     ///
     /// There is no reason to declare delegate as weak, as only *Value Types* are passed.
     /// also due to weak, delegates do not work when the `Downloader` class is declared locally.
-    public var downloadProgressDelegate: DownloaderProgressDelegate?
+    public weak var downloadProgressDelegate: DownloaderProgressDelegate?
 
     /// Post-process delegate
     ///
     /// There is no reason to declare delegate as weak, as only *Value Types* are passed.
     /// also due to weak, delegates do not work when the `Downloader` class is declared locally.
-    public var postProcessDelegate: PostProcessDelegate?
+    public weak var postProcessDelegate: PostProcessDelegate?
 
-    /// Reports when downloaded size or total files size changes.
-    public var onDownloadUpdateSize: ((_ progress: Float, _ downloadedSize: Int64, _ totalSize: Int64) -> Void)?
+    /// Informs when downloaded size or total files size changes.
+    public var onDownloadUpdateSize: ((_ progress: DMSwiftTypealias.DownloadedSizeProgress) -> Void)?
 
-    /// Reports on changes in download task count progress.
-    public var onDownloadUpdateTaskCount: ((_ progress: Float, _ finishedTaskCount: Int64, _ taskCount: Int64) -> Void)?
+    /// Informs on changes in download task count progress.
+    public var onDownloadUpdateTaskCount: ((_ progress: DMSwiftTypealias.TaskCountProgress) -> Void)?
 
-    /// Reports when download operations started.
+    /// Informs when download operations started.
     public var onDownloadStarted: (() -> Void)?
 
-    /// Reports when all download operations finished.
+    /// Informs when all download operations finished.
     public var onDownloadComplete: (() -> Void)?
 
-    /// Reports when downloaded operations finished and some of them have errors.
-    public var onDownloadCompletedWithError: ((_ tasks: [DownloadFailedTask]) -> Void)?
+    /// Informs when downloaded operations finished and some of them have errors.
+    public var onDownloadCompletedWithError: ((_ tasks: [DMSwiftTypealias.Download.FailedTask]) -> Void)?
 
-    /// Reports when post-processing operations started.
+    /// Informs when post-processing operations started.
     public var onPostProcessStarted: (() -> Void)?
 
-    /// Reports when all post-processing operations finished.
+    /// Informs when all post-processing operations finished.
     public var onPostProcessCompleted: (() -> Void)?
 
-    /// Reports when post-processing operations finished and some of them have errors.
-    public var onProcessCompletedWithError: ((_ tasks: [PostProcessFailedTask]) -> Void)?
+    /// Informs when post-processing operations finished and some of them have errors.
+    public var onProcessCompletedWithError: ((_ tasks: [DMSwiftTypealias.PostProcess.FailedTask]) -> Void)?
 
-    /// Reports on changes in post-process operations count progress.
-    public var onPostProcessUpdateTaskCount: ((_ progress: Float, _ finishedTaskCount: Int64, _ taskCount: Int64) -> Void)?
+    /// Informs on changes in post-process operations count progress.
+    public var onPostProcessUpdateTaskCount: ((_ progress: DMSwiftTypealias.TaskCountProgress) -> Void)?
 
     /// Customizable configuration.
     public var configuration: DMSwiftConfiguration {
         didSet {
-            downloadQueue.configure(with: configuration)
-            postProcessQueue.configure(with: configuration)
+            downloadQueue.update(with: configuration)
+            postProcessQueue.update(with: configuration)
         }
     }
 
     /// File storage manager.
     public var fileStorage: FileStorage {
         didSet {
-            downloadQueue.configure(with: fileStorage)
+            downloadQueue.update(with: fileStorage)
+            postProcessQueue.update(with: fileStorage)
         }
     }
 
@@ -82,10 +87,10 @@ public class DMSwift {
     public init() {
         self.fileStorage = FileStorage()
         self.configuration = DefaultDMSwiftConfiguration()
-        self.downloadQueue = DownloadQueue(downloaderConfiguration: DefaultDMSwiftConfiguration(),
-                                           fileStorage: FileStorage())
-        self.postProcessQueue = PostProcessQueue(downloaderConfiguration: DefaultDMSwiftConfiguration(),
-                                                       fileStorage: FileStorage(),
+        self.downloadQueue = DownloadQueue(configuration: configuration,
+                                           fileStorage: fileStorage)
+        self.postProcessQueue = PostProcessQueue(configuration: configuration,
+                                                       fileStorage: fileStorage,
                                                        postProcessings: [])
         self.logLevel = .none
         Logger.shared.logLevel = logLevel
@@ -98,20 +103,20 @@ public class DMSwift {
     /// - Parameters:
     ///   - path: Specifies the path where files will be saved.
     ///   - postProcessings: List of post-processes for downloaded files.
+    ///   - configuration: Configuration.
     ///   - fileStorageConfiguration: Configuration that used for `FileStorageManager`.
-    ///   - downloaderConfiguration: Configuration.
     ///   - logLevel: Logging level.
     public init(path: String? = nil,
                 postProcessings: [PostProcessing] = [],
+                configuration: DMSwiftConfiguration = DefaultDMSwiftConfiguration(),
                 fileStorageConfiguration: FileStorageConfiguration = DefaultFileStorageConfiguration(),
-                downloaderConfiguration: DMSwiftConfiguration = DefaultDMSwiftConfiguration(),
                 logLevel: LogLevel = .none) {
         let fileStorage = FileStorage(path: path, configuration: fileStorageConfiguration)
         self.fileStorage = fileStorage
-        self.configuration = downloaderConfiguration
-        self.downloadQueue = DownloadQueue(downloaderConfiguration: downloaderConfiguration,
+        self.configuration = configuration
+        self.downloadQueue = DownloadQueue(configuration: configuration,
                                            fileStorage: fileStorage)
-        self.postProcessQueue = PostProcessQueue(downloaderConfiguration: downloaderConfiguration,
+        self.postProcessQueue = PostProcessQueue(configuration: configuration,
                                                        fileStorage: fileStorage,
                                                        postProcessings: postProcessings)
         self.logLevel = logLevel
@@ -121,13 +126,22 @@ public class DMSwift {
         postProcessingQueueBind()
     }
 
+    /// Initiates with required parameters.
+    /// - Parameter path: Specifies the path where files will be saved.
+    public convenience init(path: String?) {
+        self.init(path: path, postProcessings: [],
+                  configuration: DefaultDMSwiftConfiguration(),
+                  fileStorageConfiguration: DefaultFileStorageConfiguration(),
+                  logLevel: .none)
+    }
+
     /// Prepares files for download, removes duplicates from the provided list of requests.
     ///
-    /// if the file is present locally, `forceReload == true` or the request is already in the download queue, then it will not be added to download queue.
+    /// if the file is present locally, `forceDownload == true` or the request is already in the download queue, then it will not be added to download queue.
     /// - Parameter requests: Requests for remote files.
-    /// - Parameter forceReload: Whether or not should force download, even if the file with the same name located in the device storage.
+    /// - Parameter forceDownload: Whether to force download, even if the file with the same name located in the device storage.
     /// - Parameter completion: Completion handler called when one of the download operations is finish in the queue.
-    func prepareDownload(_ requests: [URLRequestTestable], forceReload: Bool = false, completion: ((_ fileLocation: URL?, _ fromUrl: URL?, _ error: Error?) -> Void)? = nil) {
+    func prepareDownload(_ requests: [URLRequestTestable], forceDownload: Bool = false, completion: ((_ fileData: DMSwiftTypealias.Download.FileData) -> Void)? = nil) {
 
         // removes duplicates from the provided list of requests.
         let taskRequests = requests.map({ URLRequestWrapper(request: $0) }).removingDuplicates().map({ $0.request })
@@ -145,12 +159,12 @@ public class DMSwift {
             // if the file is present locally,
             // forceReload == false,
             // return file local storage location.
-            if !forceReload,
+            if !forceDownload,
                 let fileUrl = try? fileStorage.searchFile(with: url) {
                 // Logs cached file.
                 Logger.shared.cachedFilePath(fileUrl.path)
                 DispatchQueue.main.async {
-                    completion?(fileUrl, url, nil)
+                    completion?((fileUrl, url, nil))
                 }
                 continue
             }
@@ -179,20 +193,34 @@ public class DMSwift {
 
     /// Bind download queue events.
     private func downloadQueueBind() {
-        downloadQueue.onStarted = downloadStarted
-        downloadQueue.onTaskProgressUpdate = downloadTaskUpdated
-        downloadQueue.onDownloadProgressUpdate = downloadFileUpdated
+        downloadQueue.onStarted = { [weak self] in
+                   self?.downloadStarted()
+               }
+        downloadQueue.onTaskProgressUpdate = { [weak self] progress in
+            self?.downloadTaskUpdated(withProgress: progress)
+        }
+        downloadQueue.onDownloadProgressUpdate = { [weak self] progress in
+                   self?.downloadFileUpdated(withProgress: progress)
+               }
         downloadQueue.onFileSaveComplete = { [weak self] fileData in
             _ = self?.postProcessQueue.addPostProcessOperation(withFileData: fileData)
         }
-        downloadQueue.onComplete = downloadsCompleted
+        downloadQueue.onComplete = { [weak self] failedTasks in
+            self?.downloadsCompleted(withFailledTasks: failedTasks)
+        }
     }
 
     /// Bind post-processing queue events.
     private func postProcessingQueueBind() {
-        postProcessQueue.onStarted = postProcessStarted
-        postProcessQueue.onTaskProgressUpdate = postProcessUpdated
-        postProcessQueue.onComplete = postProcessCompleted
+        postProcessQueue.onStarted = { [weak self] in
+            self?.postProcessStarted()
+        }
+        postProcessQueue.onTaskProgressUpdate = { [weak self] progress in
+            self?.postProcessUpdated(withProgress: progress)
+        }
+        postProcessQueue.onComplete = { [weak self] failedTasks in
+            self?.postProcessCompleted(withFailedTasks: failedTasks)
+        }
     }
     
 }
@@ -214,8 +242,8 @@ private extension DMSwift {
     /// - Parameter progress: Downloads task progress.
     func downloadTaskUpdated(withProgress progress: DownloadTaskProgress) {
         DispatchQueue.main.async {
-            self.onDownloadUpdateTaskCount?(progress.progress, progress.finishedUnitCount, progress.totalUnitCount)
-            self.downloadProgressDelegate?.downloadDidUpdate(progress: progress.progress, finishedTaskCount: progress.finishedUnitCount, taskCount: progress.totalUnitCount)
+            self.onDownloadUpdateTaskCount?((progress.progress, progress.finishedUnitCount, progress.totalUnitCount))
+            self.downloadProgressDelegate?.downloadDidUpdate( progress: progress.progress, finishedTaskCount: progress.finishedUnitCount, taskCount: progress.totalUnitCount)
         }
         // Logging.
         Logger.shared.downloadTaskUpdated(withProgress: progress)
@@ -225,7 +253,7 @@ private extension DMSwift {
     /// - Parameter progress: Downloads files size progress
     func downloadFileUpdated(withProgress progress: DownloadTaskProgress) {
         DispatchQueue.main.async {
-            self.onDownloadUpdateSize?(progress.downloadProgress, progress.totalUnitRecievedSize, progress.totalUnitFileSize)
+            self.onDownloadUpdateSize?((progress.downloadProgress, progress.totalUnitRecievedSize, progress.totalUnitFileSize))
             self.downloadProgressDelegate?.downloadDidUpdate(progress: progress.downloadProgress, downloadedSize: progress.totalUnitRecievedSize, totalSize: progress.totalUnitFileSize)
         }
         // Logging.
@@ -277,7 +305,7 @@ private extension DMSwift {
     private func postProcessUpdated(withProgress progress: TaskProgress) {
         DispatchQueue.main.async {
             self.postProcessDelegate?.postProcessDidUpdate(progress: progress.progress, finishedTaskCount: progress.finishedUnitCount, taskCount: progress.totalUnitCount)
-            self.onPostProcessUpdateTaskCount?(progress.progress, progress.finishedUnitCount, progress.totalUnitCount)
+            self.onPostProcessUpdateTaskCount?((progress.progress, progress.finishedUnitCount, progress.totalUnitCount))
         }
         // Logging.
         Logger.shared.postProcessUpdated(withProgress: progress)
@@ -285,7 +313,7 @@ private extension DMSwift {
 
     /// All post-processes finish event handler.
     /// - Parameter failedTasks: Failed to complete tasks.
-    private func postProcessCompleted(withFailedTasks failedTasks: [PostProcessFailedTask]) {
+    private func postProcessCompleted(withFailedTasks failedTasks: [DMSwiftTypealias.PostProcess.FailedTask]) {
         let withError = failedTasks.count > 0
         DispatchQueue.main.async {
             if withError {

@@ -8,9 +8,13 @@
 
 import Foundation
 
+/// Log-level
 public enum LogLevel: Int {
     case none = 0, low = 1, medium = 2, high = 3
 
+    /// Checks if log-level is satisfactory
+    /// - Parameter logLevel: A log-level.
+    /// - Returns: `Bool`
     func isLogLevelSatisfied(with logLevel: LogLevel) -> Bool {
         return self.rawValue >= logLevel.rawValue
     }

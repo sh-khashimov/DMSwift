@@ -21,7 +21,7 @@ public extension FileManager {
     /// - Parameter directoryURL: Directory `URL` where files located.
     /// - Throws: `FileStorageError.invalidPath` - specified directory not found.
     func removeAllFiles(atDirectory directoryURL: URL) throws {
-        guard let directoryContents = try? self.contentsOfDirectory(at: directoryURL, includingPropertiesForKeys: nil, options: []) else { throw FileStorageError.invalidPath }
+        guard let directoryContents = try? self.contentsOfDirectory(at: directoryURL, includingPropertiesForKeys: nil, options: []) else { throw FileStorageError.invalidPath(path: directoryURL.path) }
 
         for fileURL in directoryContents {
             try? self.removeItem(at: fileURL)

@@ -11,20 +11,20 @@ import Foundation
 class DownloadTask: NSObject, DownloadableTask {
 
 
-    var delegate: DownloadDelegate?
+    weak var delegate: DownloadDelegate?
 
     var onReciveFileSize: ((Int64) -> Void)?
 
-    var onUpdateProgress: ((DownloadProgressData) -> Void)?
+    var onUpdateProgress: ((DMSwiftTypealias.Download.ProgressData) -> Void)?
 
-    var completionHandler: ((DownloadedFileData) -> Void)?
+    var completionHandler: ((DMSwiftTypealias.Download.FileData) -> Void)?
 
     /// The file data saved.
-    var onFileDataChange: ((SavedFileData) -> Void)?
+    var onFileDataChange: ((DMSwiftTypealias.Download.SavedFileData) -> Void)?
 
     var fileStorage: FileStorage?
 
-    var fileData: SavedFileData?
+    var fileData: DMSwiftTypealias.Download.SavedFileData?
 
     var session: URLSessionTestable?
 
@@ -53,7 +53,7 @@ class DownloadTask: NSObject, DownloadableTask {
     ///   - timeoutIntervalForRequest: Request timeout interval.
     ///   - completionHandler: Complete handler.
     init(_ request: URLRequestTestable, fileStorage: FileStorage, delegate: DownloadDelegate? = nil, downloadType: URLSessionTaskType, timeoutIntervalForRequest: TimeInterval,
-         _ completionHandler: ((DownloadedFileData) -> Void)? = nil) {
+         _ completionHandler: ((DMSwiftTypealias.Download.FileData) -> Void)? = nil) {
 
         self.delegate = delegate
         self.fileStorage = fileStorage

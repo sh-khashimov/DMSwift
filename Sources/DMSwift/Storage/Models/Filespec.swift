@@ -33,7 +33,7 @@ public struct Filespec: Codable {
     /// File size, in bytes
     public var size: Int64?
 
-    /// The location of the directory in the Application sandbox.
+    /// The location of the directory in the Application sandbox
     public var searchPathDirectoryId: UInt?
 }
 
@@ -49,13 +49,11 @@ public extension Filespec {
         var filePath = searchDirectoryURL.appendingPathComponent(directoryPath, isDirectory: true)
         if let filename = self.filename {
             filePath.appendPathComponent(filename)
-        } else {
-            if let name = self.name {
-                filePath.appendPathComponent(name)
-            }
-            if let fileExtension = self.fileExtension {
-                filePath.appendPathExtension(fileExtension)
-            }
+        } else if let name = self.name {
+            filePath.appendPathComponent(name)
+        }
+        if let fileExtension = self.fileExtension {
+            filePath.appendPathExtension(fileExtension)
         }
         return filePath.path
     }
@@ -79,6 +77,8 @@ public extension Filespec {
         }
     }
 
+    /// Creates a **Filespec**
+    /// - Parameter path: **path** where a **Filespec** file located
     init?(fromFilespecPath path: String) {
         let url = URL(fileURLWithPath: path)
         do {
@@ -86,6 +86,25 @@ public extension Filespec {
         } catch {
             return nil
         }
+    }
+
+    /// Creates a **Filespec**
+    /// - Parameters:
+    ///   - url: **url** from where the file was downloaded
+    ///   - path: **path** where the file is located in the device
+    ///   - name: original given **name** to the file
+    ///   - filename: **filename** that stores in the device
+    ///   - fileExtension: File's extention
+    ///   - size: File size, in bytes
+    ///   - searchPathDirectoryId: The location of the directory in the Application sandbox
+    init(url: URL?, path: String?, name: String?, filename: String?, fileExtension: String?, size: Int64?, searchPathDirectoryId: UInt?) {
+        self.url = url
+        self.directoryPath = path
+        self.name = name
+        self.filename = filename
+        self.fileExtension = fileExtension
+        self.size = size
+        self.searchPathDirectoryId = searchPathDirectoryId
     }
 }
 

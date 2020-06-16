@@ -17,19 +17,19 @@ protocol DownloadableTask: class {
     var onReciveFileSize: ((_ fileSize: Int64) -> Void)? { get set }
 
     /// Progress updated.
-    var onUpdateProgress: ((_ progress: DownloadProgressData) -> Void)? { get set }
+    var onUpdateProgress: ((_ progress: DMSwiftTypealias.Download.ProgressData) -> Void)? { get set }
 
     /// Download complete.
-    var completionHandler: ((_ data: DownloadedFileData) -> Void)? { get set }
+    var completionHandler: ((_ data: DMSwiftTypealias.Download.FileData) -> Void)? { get set }
 
     /// The file data saved.
-    var onFileDataChange: ((_ fileData: SavedFileData) -> Void)? { get set }
+    var onFileDataChange: ((_ fileData: DMSwiftTypealias.Download.SavedFileData) -> Void)? { get set }
 
     /// The file storage manager that used to save a file.
     var fileStorage: FileStorage? { get set }
 
     /// The file saved location, filename and file extension.
-    var fileData: SavedFileData? { get set }
+    var fileData: DMSwiftTypealias.Download.SavedFileData? { get set }
 
     var session: URLSessionTestable? { get set }
 
@@ -57,7 +57,7 @@ extension DownloadableTask {
     ///   - url: File remote location.
     ///   - error: Error.
     func complete(withFileLocation location: URL?, url: URL?, error: Error?) {
-        let downloadedFileData: DownloadedFileData = (location: location, url: url, error: error)
+        let downloadedFileData: DMSwiftTypealias.Download.FileData = (location: location, url: url, error: error)
         self.completionHandler?(downloadedFileData)
         delegate?.completed(downloadedFileData)
         self.session?.finishTasksAndInvalidate()
@@ -93,7 +93,8 @@ extension DownloadableTask {
         createFilespecIfNeeded(from: url, path: location.path, name: name, filename: filename, fileExtension: fileExtension, size: size)
 
         // Updates file saved data.
-        self.fileData = (location: location, filename: name, fileExtension: fileExtension)
+        //TODO: check filename or name!
+        self.fileData = (location: location, filename: filename, fileExtension: fileExtension)
         guard let fileSavedData = self.fileData else { return }
         onFileDataChange?(fileSavedData)
         self.delegate?.fileData(fileSavedData)
@@ -146,7 +147,7 @@ extension DownloadableTask {
         // Creates a downloaded percent.
         let percentageDownloaded = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
         // Updates progress.
-        let downloadProgressData: DownloadProgressData = (progress: percentageDownloaded, downloadedSize: totalBytesWritten, receivedSize: bytesWritten, fileSize: totalBytesExpectedToWrite)
+        let downloadProgressData: DMSwiftTypealias.Download.ProgressData = (progress: percentageDownloaded, downloadedSize: totalBytesWritten, receivedSize: bytesWritten, fileSize: totalBytesExpectedToWrite)
         delegate?.updated(downloadProgressData)
         onUpdateProgress?(downloadProgressData)
         return percentageDownloaded >= 1
@@ -184,7 +185,7 @@ extension DownloadableTask where Self: URLSessionDownloadDelegate {
     ///   - url: A file remote location.
     ///   - location: A location where a file will be saved.
     ///   - filenameAlias: Filename, name and file extension.
-    func didFinishDownloading(from url: URL?, to location: URL, filenameAlias: FilenameAlias?) {
+    func didFinishDownloading(from url: URL?, to location: URL, filenameAlias: DMSwiftTypealias.Storage.Filename?) {
 
         // Removes previously a downloaded file.
         if let url = url {
@@ -192,10 +193,10 @@ extension DownloadableTask where Self: URLSessionDownloadDelegate {
         }
 
         // Guard filename.
-        guard let filename = filenameAlias?.name else {
+        guard let filename = filenameAlias?.filename else {
             // Completes with error.
-            let error = DownloadError.invalidFilename
-            complete(withFileLocation: nil, url: url, error: DownloadError.invalidFilename)
+            let error = DownloadError.invalidFilename(path: url?.path)
+            complete(withFileLocation: nil, url: url, error: error)
             // Logs error.
             Logger.shared.downloadError(error, from: url)
             return
@@ -205,7 +206,7 @@ extension DownloadableTask where Self: URLSessionDownloadDelegate {
         guard let fileLocation = try? fileStorage?.moveFile(at: location, withFileName: filename, fileExtension: filenameAlias?.extension)
             else {
                 // Completes with error.
-                let error = DownloadError.cannotMoveFile
+                let error = DownloadError.cannotMoveFile(path: location.path, filename: filename, fileExtension: filenameAlias?.extension)
                 complete(withFileLocation: nil, url: url, error: error)
                 // Logs error.
                 Logger.shared.downloadError(error, from: url)
@@ -229,7 +230,7 @@ extension DownloadableTask where Self: URLSessionDataDelegate {
     ///   - fileSize: A file size.
     ///   - url: A file remote location.
     ///   - filenameAlias: Filename, name and file extension.
-    func didReceive(fileSize: Int64, at url: URL?, filenameAlias: FilenameAlias?) {
+    func didReceive(fileSize: Int64, at url: URL?, filenameAlias: DMSwiftTypealias.Storage.Filename?) {
         // Reset total received bytes.
         totalBytesWritten = 0
         // Updates file size.
@@ -256,12 +257,12 @@ extension DownloadableTask where Self: URLSessionDataDelegate {
     ///   - data: A new recevied data.
     ///   - url: A file remote location.
     ///   - filenameAlias: Filename, name and file extension.
-    func didReceive(data: Data, at url: URL?, filenameAlias: FilenameAlias?) {
+    func didReceive(data: Data, at url: URL?, filenameAlias: DMSwiftTypealias.Storage.Filename?) {
 
         // Guard filename.
-        guard let _filename = filenameAlias?.name else {
+        guard let _filename = filenameAlias?.filename else {
             // Complete with error
-            let error = DownloadError.invalidFilename
+            let error = DownloadError.invalidFilename(path: url?.path)
             complete(withFileLocation: nil, url: url, error: error)
             // Logs error.
             Logger.shared.downloadError(error, from: url)
@@ -270,7 +271,7 @@ extension DownloadableTask where Self: URLSessionDataDelegate {
 
         // Guard file's local location.
         guard let fileUrl = fileStorage?.urlFor(filename: _filename, fileExtension: filenameAlias?.extension) else {
-            let error = DownloadError.fileLocalURLCannotBeCreated
+            let error = DownloadError.fileLocalURLCannotBeCreated(filename: _filename, fileExtension: filenameAlias?.extension)
             // Complete with error
             complete(withFileLocation: nil, url: url, error: error)
             // Logs error.
@@ -283,7 +284,7 @@ extension DownloadableTask where Self: URLSessionDataDelegate {
         let receivedSize = Int64(data.count)
         let totalBytesWritten = self.totalBytesWritten + Int64(data.count)
 
-        // Whether or not download is complete.
+        // Whether the download is complete.
         let isComplete = updateProgress(withBytesWritten: receivedSize, totalBytesWritten: totalBytesWritten, totalBytesExpectedToWrite: fileSize)
 
         //If download complete.
@@ -308,7 +309,7 @@ extension DownloadableTask where Self: URLSessionTaskDelegate {
     ///   - error: Error.
     ///   - url: File location.
     ///   - filenameAlias: Filename, name and file extension.
-    func didCompleteWithError(error: Error?, at url: URL?, filenameAlias: FilenameAlias?) {
+    func didCompleteWithError(error: Error?, at url: URL?, filenameAlias: DMSwiftTypealias.Storage.Filename?) {
         // Check only if completed with error.
         guard let error = error else { return }
 

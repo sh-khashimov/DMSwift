@@ -14,15 +14,21 @@ public struct DefaultFileStorageConfiguration: FileStorageConfiguration {
 
     /// The path to the root directory.
     ///
-    /// Default is document directory.
-    public var searchPathDirectory: FileManager.SearchPathDirectory = .documentDirectory
+    /// Default value is document directory. On **macOS** or **Linux** default value is cachesDirectory.
+    public var searchPathDirectory: FileManager.SearchPathDirectory
 
-    /// Whether or not, should create and save a `Filespec`.
+    /// Whether should create and save a `Filespec`.
     public var createFilespec: Bool = true
 
-    /// Whether or not, should use hashed MD5 path for filename.
+    /// Whether to use hashed MD5 path for a filename.
     public var useHashedPathForFilename: Bool = false
 
-    public init() { }
+    public init() {
+        #if os(macOS) || os(Linux)
+        searchPathDirectory = .cachesDirectory
+        #else
+        searchPathDirectory = .documentDirectory
+        #endif
+    }
 
 }

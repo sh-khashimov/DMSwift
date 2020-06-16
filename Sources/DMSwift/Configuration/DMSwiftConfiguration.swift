@@ -29,7 +29,7 @@ public protocol DMSwiftConfiguration {
     /// `QualityOfService` for `PostProcessQueue`.
     var postProcessQueueQualytyOfService: QualityOfService { get set }
 
-    /// Whether or not, should start `PostProcessQueue` concurrently to `DownloadQueue`.
+    /// Whether to start `PostProcessQueue` concurrently to `DownloadQueue`.
     /// If *false*,  `PostProcessQueue` will be started after `DownloadQueue` finish.
     var startPostProcessQueueConcurrentlyToDownloadQueue: Bool { get set }
 }

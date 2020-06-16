@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias PostProcessFailedTask = (fileLocation: URL, process: [(name: String, error: Error?)])
-
 /// OperationQueue class, which is responsible for managing all post-processing operations.
 class PostProcessQueue: OperationQueue {
 
@@ -17,58 +15,68 @@ class PostProcessQueue: OperationQueue {
     private var postProcesses: [PostProcessing]
 
     /// The file storage manager used to pass to a PostProcessing object.
-    private let fileStorage: FileStorage
+    private var fileStorage: FileStorage
 
     /// Progress.
     private var postProcessProgress = TaskProgress()
 
-    /// Whether or not should post-process in concurrency to download queue.
+    /// Whether the post-process will be in concurrency to download queue.
     var postProcessInConcurrencyToDownloadQueue: Bool
 
     /// The `Operation` object that used to report the completion of all running operations.
     var finishedOperation: Operation?
 
-    /// List of tasks that failed.
-    let failedTasks = SynchronizedArray<PostProcessFailedTask>()
+    /// TODO: Temporary crutches
+    /// Fix adding finishedOperation twice
+    private var isFinishedOperationAdded: Bool = false
 
-    /// Reports successful start of operations.
+    /// List of tasks that failed.
+    let failedTasks = SynchronizedArray<DMSwiftTypealias.PostProcess.FailedTask>()
+
+    /// Informs successful start of operations.
     public var onStarted: (() -> Void)?
 
-    /// Reports on changes in progress.
+    /// Informs on changes in progress.
     public var onTaskProgressUpdate: ((_ progress: TaskProgress) -> Void)?
 
-    /// Reports completion of all operations.
-    public var onComplete: ((_ failledTasks: [PostProcessFailedTask]) -> Void)?
+    /// Informs completion of all operations.
+    public var onComplete: ((_ failledTasks: [DMSwiftTypealias.PostProcess.FailedTask]) -> Void)?
 
     /// Initiates with required parameters.
     /// - Parameters:
-    ///   - downloaderConfiguration: `DownloaderConfiguration` used to get preferred configuration.
+    ///   - configuration: `DownloaderConfiguration` used to get preferred configuration.
     ///   - fileStorage: The file storage manager that used to pass to a `PostProcessing` object.
     ///   - postProcessings: Available post-processes.
-    init(downloaderConfiguration: DMSwiftConfiguration, fileStorage: FileStorage, postProcessings: [PostProcessing]) {
+    init(configuration: DMSwiftConfiguration, fileStorage: FileStorage, postProcessings: [PostProcessing]) {
         self.postProcesses = postProcessings
-        self.postProcessInConcurrencyToDownloadQueue = downloaderConfiguration.startPostProcessQueueConcurrentlyToDownloadQueue
+        self.postProcessInConcurrencyToDownloadQueue = configuration.startPostProcessQueueConcurrentlyToDownloadQueue
         self.fileStorage = fileStorage
         super.init()
-        self.name = downloaderConfiguration.postProcessingQueueName
-        self.qualityOfService = downloaderConfiguration.postProcessQueueQualytyOfService
-        self.maxConcurrentOperationCount = downloaderConfiguration.postProcessMaxConcurrentOperationCount
+        self.name = configuration.postProcessingQueueName
+        self.qualityOfService = configuration.postProcessQueueQualytyOfService
+        self.maxConcurrentOperationCount = configuration.postProcessMaxConcurrentOperationCount
         self.isSuspended = true
     }
 
-    /// <#Description#>
-    /// - Parameter downloaderConfiguration: <#downloaderConfiguration description#>
-    func configure(with downloaderConfiguration: DMSwiftConfiguration) {
-        self.postProcessInConcurrencyToDownloadQueue = downloaderConfiguration.startPostProcessQueueConcurrentlyToDownloadQueue
-        self.name = downloaderConfiguration.postProcessingQueueName
-        self.qualityOfService = downloaderConfiguration.postProcessQueueQualytyOfService
-        self.maxConcurrentOperationCount = downloaderConfiguration.postProcessMaxConcurrentOperationCount
+    /// Updates `Self` with the `DMSwiftConfiguration`
+    /// - Parameter dmSwiftConfiguration: Customizable configuration.
+    func update(with dmSwiftConfiguration: DMSwiftConfiguration) {
+        self.postProcessInConcurrencyToDownloadQueue = dmSwiftConfiguration.startPostProcessQueueConcurrentlyToDownloadQueue
+        self.name = dmSwiftConfiguration.postProcessingQueueName
+        self.qualityOfService = dmSwiftConfiguration.postProcessQueueQualytyOfService
+        self.maxConcurrentOperationCount = dmSwiftConfiguration.postProcessMaxConcurrentOperationCount
     }
 
-    /// <#Description#>
-    /// - Parameter postProcesses: <#postProcesses description#>
+    /// Updates **postProcesses**
+    /// - Parameter postProcesses: List of all available post-preccesses.
     func update(postProcesses: [PostProcessing]) {
         self.postProcesses = postProcesses
+    }
+
+    /// Updates `FileStorage`.
+    /// - Parameter fileStorage: a new `FileStorage`
+    func update(with fileStorage: FileStorage) {
+        self.fileStorage = fileStorage
     }
 
     /// Method used to start all operations in Queue.
@@ -112,9 +120,11 @@ class PostProcessQueue: OperationQueue {
         }
 
         // if finishedOperation not nil
-        if let finishedOperation = self.finishedOperation, !self.operations.contains(finishedOperation) {
+        if let finishedOperation = self.finishedOperation,
+            !isFinishedOperationAdded {
             // add finishedOperation to queue
             self.addOperation(finishedOperation)
+            isFinishedOperationAdded = true
         }
 
         // if post process should start in concurrency to download queue
@@ -126,7 +136,7 @@ class PostProcessQueue: OperationQueue {
 
     /// Add post-process operation to queue.
     /// - Parameter fileData: `FileData` object that represents a file location `URL`, filename and file extension.
-    public func addPostProcessOperation(withFileData fileData: SavedFileData?) -> Operation? {
+    public func addPostProcessOperation(withFileData fileData: DMSwiftTypealias.Download.SavedFileData?) -> Operation? {
 
         guard let location = fileData?.location,
             let fileName = fileData?.filename,
@@ -150,18 +160,20 @@ class PostProcessQueue: OperationQueue {
         groupPostProcessingOperation.prepareToStart(withSourceLocation: fileLocation, filename: filename, fileExtension: fileExtension)
 
         // when group of operations complete
-        groupPostProcessingOperation.onComplete = { uncompleted in
+        groupPostProcessingOperation.onComplete = { [weak self] uncompleted in
             if uncompleted.count > 0 {
                 // append failed task
-                self.failedTasks.append((fileLocation: fileLocation, process: uncompleted))
+                self?.failedTasks.append((fileLocation: fileLocation, process: uncompleted))
                 // increment failed unit count
-                self.postProcessProgress.failedUnitCount += 1
+                self?.postProcessProgress.failedUnitCount += 1
             } else {
                 // increment successfully finished unit count
-                self.postProcessProgress.finishedUnitCount += 1
+                self?.postProcessProgress.finishedUnitCount += 1
             }
             // update progress
-            self.onTaskProgressUpdate?(self.postProcessProgress)
+            if let progress = self?.postProcessProgress {
+                self?.onTaskProgressUpdate?(progress)
+            }
         }
 
         // add finishedOperation dependency to group of operation
@@ -180,5 +192,6 @@ class PostProcessQueue: OperationQueue {
     private func reset() {
         postProcessProgress.reset()
         finishedOperation = nil
+        isFinishedOperationAdded = false
     }
 }

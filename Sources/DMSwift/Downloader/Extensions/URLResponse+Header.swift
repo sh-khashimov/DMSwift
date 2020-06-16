@@ -18,8 +18,8 @@ extension URLResponse {
     }
 
     /// Creates file name related data.
-    /// - Parameter useHashedPathForFilename: Whether or not should use MD5 hash of `URL` path for file name.
-    func filenameAlias(useHashedPathForFilename: Bool, requestUrl: URL? = nil) -> FilenameAlias? {
+    /// - Parameter useHashedPathForFilename: Whether to use the MD5 hash of `URL` path for a filename.
+    func filenameAlias(useHashedPathForFilename: Bool, requestUrl: URL? = nil) -> DMSwiftTypealias.Storage.Filename? {
 
         var filename: String? = nil
         var name: String? = nil
@@ -62,6 +62,8 @@ extension URLResponse {
             // if filename should be MD5 hash
             if useHashedPathForFilename {
                 filename = filenameAliasFromUrl?.filename
+            } else {
+                filename = name
             }
 
             // if the file extension is undefined

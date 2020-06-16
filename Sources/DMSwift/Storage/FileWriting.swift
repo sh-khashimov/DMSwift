@@ -113,7 +113,7 @@ public extension FileWriting {
             fileUrl.appendPathExtension(fileExtension)
         }
 
-        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound }
+        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound(path: fileUrl.path) }
         try fileManager.removeItem(atPath: fileUrl.path)
     }
 
@@ -124,12 +124,12 @@ public extension FileWriting {
     /// `FileStorageError.fileNotFound`
     func removeFile(_ url: URL, at directoryURL: URL? = nil) throws {
         let fileData = url.filenameAndExtention(useHashedPathForFilename: self.configuration.useHashedPathForFilename)
-        guard let filename = fileData.filename else { throw FileStorageError.invalidFileNameOrExtentision }
+        guard let filename = fileData.filename else { throw FileStorageError.invalidFileNameOrExtentision(path: url.path) }
         var fileUrl = (directoryURL ?? self.directoryURL).appendingPathComponent(filename)
         if let fileExtension = fileData.extension {
             fileUrl.appendPathExtension(fileExtension)
         }
-        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound }
+        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound(path: fileUrl.path) }
         try? removeFilespec(url, at: directoryURL)
         try fileManager.removeItem(atPath: fileUrl.path)
     }
@@ -139,9 +139,9 @@ public extension FileWriting {
     ///   - url: File remote location.
     ///   - directoryURL: directory.
     func removeFilespec(_ url: URL?, at directoryURL: URL? = nil) throws {
-        guard let filename = url?.absoluteString.MD5 else { throw FileStorageError.invalidFileNameOrExtentision }
+        guard let filename = url?.absoluteString.MD5 else { throw FileStorageError.invalidFileNameOrExtentision(path: url?.path) }
         let fileUrl = (directoryURL ?? self.directoryURL).appendingPathComponent(".\(filename)")
-        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound }
+        guard fileManager.fileExists(atPath: fileUrl.path) else { throw FileStorageError.fileNotFound(path: fileUrl.path) }
         try fileManager.removeItem(atPath: fileUrl.path)
     }
 
@@ -151,20 +151,12 @@ public extension FileWriting {
         try fileManager.removeItem(at: fileURL)
     }
 
-    /// Remove `FileStorageManageable.searchDirectoryURL` that represent the `FileManager.SearchPathDirectory`.
-    ///
-    /// System will re-create *SearchPathDirectory*.
-    /// - Attention: All files and folders will be deleted from specified *FileManager.SearchPathDirectory* including `FileStorageManageable.directoryURL`.
-    /// Use with caution.
-    /// - Throws: `FileStorageError.invalidPath`
-    func removeFilesFromSearchDirectory() throws {
-        try fileManager.removeAllFiles(atDirectory: searchDirectoryURL)
-    }
-
     /// Remove `FileStorageManageable.directoryURL`.
     /// - Parameter directory: directory.
     /// - Throws: `FileStorageError.invalidPath`
     func removeDirectory(_ directory: URL? = nil) throws {
+        let _directory = directory ?? directoryURL
+        guard _directory != searchDirectoryURL else { throw FileStorageError.invalidPath(path: _directory.path) }
         try fileManager.removeItem(at: (directory ?? directoryURL))
     }
 
@@ -173,6 +165,7 @@ public extension FileWriting {
     /// Directory self won't be removed.
     /// - Throws: `FileStorageError.invalidPath`
     func removeFilesFromDirectory() throws {
+        guard directoryURL != searchDirectoryURL else { throw FileStorageError.invalidPath(path: directoryURL.path) }
         try fileManager.removeAllFiles(atDirectory: directoryURL)
     }
 }

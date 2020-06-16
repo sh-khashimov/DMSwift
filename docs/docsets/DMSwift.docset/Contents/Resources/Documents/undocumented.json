@@ -1,0 +1,516 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Configuration/DefaultDMSwiftConfiguration.swift",
+      "line": 28,
+      "symbol": "DefaultDMSwiftConfiguration.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DMSwiftAPI.swift",
+      "line": 11,
+      "symbol": "DMSwiftAPI",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DMSwiftAPI.swift",
+      "line": 14,
+      "symbol": "DMSwiftAPI",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DefaultOperation.swift",
+      "line": 29,
+      "symbol": "DefaultOperation.isReady",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DefaultOperation.swift",
+      "line": 30,
+      "symbol": "DefaultOperation.isFinished",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DefaultOperation.swift",
+      "line": 31,
+      "symbol": "DefaultOperation.isExecuting",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/DefaultOperation.swift",
+      "line": 32,
+      "symbol": "DefaultOperation.isAsynchronous",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 90,
+      "symbol": "DownloadTask",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 92,
+      "symbol": "DownloadTask.urlSession(_:downloadTask:didFinishDownloadingTo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 104,
+      "symbol": "DownloadTask.urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 112,
+      "symbol": "DownloadTask",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 114,
+      "symbol": "DownloadTask.urlSession(_:dataTask:didReceive:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 124,
+      "symbol": "DownloadTask.urlSession(_:dataTask:didReceive:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 137,
+      "symbol": "DownloadTask",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/DownloadTask.swift",
+      "line": 138,
+      "symbol": "DownloadTask.urlSession(_:task:didCompleteWithError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Extensions/URLRequest+Testable.swift",
+      "line": 19,
+      "symbol": "URLRequest.session(withTimeout:delegate:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Extensions/URLSession+Testable.swift",
+      "line": 19,
+      "symbol": "URLSession.dataTask(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Extensions/URLSession+Testable.swift",
+      "line": 24,
+      "symbol": "URLSession.downloadTask(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Models/DownloadError.swift",
+      "line": 19,
+      "symbol": "DownloadError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Models/URLRequestWrapper.swift",
+      "line": 15,
+      "symbol": "URLRequestWrapper",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Models/URLSessionTaskType.swift",
+      "line": 11,
+      "symbol": "URLSessionTaskType",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Models/URLSessionTaskType.swift",
+      "line": 12,
+      "symbol": "URLSessionTaskType.dataTask",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Downloader/Models/URLSessionTaskType.swift",
+      "line": 12,
+      "symbol": "URLSessionTaskType.downloadTask",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Extensions/Operation+State.swift",
+      "line": 15,
+      "symbol": "Operation.OperationState.ready",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Extensions/Operation+State.swift",
+      "line": 16,
+      "symbol": "Operation.OperationState.executing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Extensions/Operation+State.swift",
+      "line": 17,
+      "symbol": "Operation.OperationState.finished",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Logger/LogLevel.swift",
+      "line": 13,
+      "symbol": "LogLevel.high",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Logger/LogLevel.swift",
+      "line": 13,
+      "symbol": "LogLevel.low",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Logger/LogLevel.swift",
+      "line": 13,
+      "symbol": "LogLevel.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Logger/LogLevel.swift",
+      "line": 13,
+      "symbol": "LogLevel.none",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 21,
+      "symbol": "SynchronizedArray.synchronizedArray",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 29,
+      "symbol": "SynchronizedArray.count",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 37,
+      "symbol": "SynchronizedArray.append(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 43,
+      "symbol": "SynchronizedArray.clear()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 49,
+      "symbol": "SynchronizedArray.subscript(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.subscript",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 60,
+      "symbol": "SynchronizedArray.index(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/SynchronizedArray.swift",
+      "line": 68,
+      "symbol": "SynchronizedArray.contains(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 11,
+      "symbol": "TaskProgressCounting",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 12,
+      "symbol": "TaskProgressCounting.totalUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 13,
+      "symbol": "TaskProgressCounting.finishedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 14,
+      "symbol": "TaskProgressCounting.failedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 17,
+      "symbol": "TaskProgressCounting",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 18,
+      "symbol": "TaskProgressCounting.isFinished",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 22,
+      "symbol": "TaskProgressCounting.progress",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 27,
+      "symbol": "TaskProgressCounting.reset()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 34,
+      "symbol": "FileDownloadProgressCounting",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 35,
+      "symbol": "FileDownloadProgressCounting.totalUnitFileSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 36,
+      "symbol": "FileDownloadProgressCounting.totalUnitRecievedSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 39,
+      "symbol": "FileDownloadProgressCounting",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 40,
+      "symbol": "FileDownloadProgressCounting.isFinishedDownload",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 44,
+      "symbol": "FileDownloadProgressCounting.downloadProgress",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 48,
+      "symbol": "FileDownloadProgressCounting.reset()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 57,
+      "symbol": "TaskProgress",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 58,
+      "symbol": "TaskProgress.totalUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 59,
+      "symbol": "TaskProgress.finishedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 60,
+      "symbol": "TaskProgress.failedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 63,
+      "symbol": "DownloadTaskProgress",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 64,
+      "symbol": "DownloadTaskProgress.totalUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 65,
+      "symbol": "DownloadTaskProgress.finishedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 66,
+      "symbol": "DownloadTaskProgress.failedUnitCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 67,
+      "symbol": "DownloadTaskProgress.totalUnitFileSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Models/TaskProgress.swift",
+      "line": 68,
+      "symbol": "DownloadTaskProgress.totalUnitRecievedSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/PostProcess/PostProcessingOperation.swift",
+      "line": 17,
+      "symbol": "PostProcessingOperation.onComplete",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/PostProcess/PostProcessingOperation.swift",
+      "line": 44,
+      "symbol": "PostProcessingOperation.start()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/PostProcess/PostProcessingOperation.swift",
+      "line": 55,
+      "symbol": "PostProcessingOperation.cancel()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Configuration/DefaultFileStorageConfiguration.swift",
+      "line": 26,
+      "symbol": "DefaultFileStorageConfiguration.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 11,
+      "symbol": "FileStorageError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 12,
+      "symbol": "FileStorageError.invalidPath(path:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 13,
+      "symbol": "FileStorageError.invalidFileNameOrExtentision(path:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 14,
+      "symbol": "FileStorageError.fileNotFound(path:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 15,
+      "symbol": "FileStorageError.cannotDecodeRawData(objectType:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 16,
+      "symbol": "FileStorageError.writeIOError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift/Sources/DMSwift/Storage/Models/FileStorageError.swift",
+      "line": 19,
+      "symbol": "FileStorageError",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/sherzod/Documents/Xcode/!opensourced/DMSwift Projects/DMSwift"
+}

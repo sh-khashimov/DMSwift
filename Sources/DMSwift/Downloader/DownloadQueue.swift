@@ -18,7 +18,7 @@ class DownloadQueue: OperationQueue {
     var finishedOperation: Operation?
 
     /// List of tasks that failed.
-    let failedTasks = SynchronizedArray<DownloadFailedTask>()
+    let failedTasks = SynchronizedArray<DMSwiftTypealias.Download.FailedTask>()
 
     /// Download type that passes to download operation.
     private var urlSessionTaskType: URLSessionTaskType
@@ -29,37 +29,43 @@ class DownloadQueue: OperationQueue {
     /// Timeout interval that passes to download operation.
     private var timeoutIntervalForRequest: TimeInterval
 
-    /// Reports successful start of operations.
+    /// TODO: Temporary crutches
+    /// Fix adding finishedOperation twice
+    private var isFinishedOperationAdded: Bool = false
+
+    /// Informs successful start of operations.
     public var onStarted: (() -> Void)?
 
-    /// Reports on changes in progress.
+    /// Informs on changes in progress.
     public var onTaskProgressUpdate: ((_ progress: DownloadTaskProgress) -> Void)?
 
-    /// Reports on when downloaded size or total files size changes.
+    /// Informs on when downloaded size or total files size changes.
     public var onDownloadProgressUpdate: ((_ progress: DownloadTaskProgress) -> Void)?
 
-    /// Reports when one of files will be saved.
-    public var onFileSaveComplete: ((_ fileData: SavedFileData?) -> Void)?
+    /// Informs when one of files will be saved.
+    public var onFileSaveComplete: ((_ fileData: DMSwiftTypealias.Download.SavedFileData?) -> Void)?
 
-    /// Reports completion of all operations.
-    public var onComplete: ((_ failledTasks: [DownloadFailedTask]) -> Void)?
+    /// Informs completion of all operations.
+    public var onComplete: ((_ failledTasks: [DMSwiftTypealias.Download.FailedTask]) -> Void)?
 
     /// Initiates with required parameters.
     /// - Parameters:
-    ///   - downloaderConfiguration: Configuration to customize download process.
+    ///   - configuration: Configuration to customize download process.
     ///   - fileStorage: File storage manager for files manipulations.
-    init(downloaderConfiguration: DMSwiftConfiguration, fileStorage: FileStorage) {
-        self.urlSessionTaskType = downloaderConfiguration.urlSessionTaskType
-        self.timeoutIntervalForRequest = downloaderConfiguration.timeoutIntervalForRequest
+    init(configuration: DMSwiftConfiguration, fileStorage: FileStorage) {
+        self.urlSessionTaskType = configuration.urlSessionTaskType
+        self.timeoutIntervalForRequest = configuration.timeoutIntervalForRequest
         self.fileStorage = fileStorage
         super.init()
-        self.name = downloaderConfiguration.downloadQueueName
-        self.qualityOfService = downloaderConfiguration.downloadQueueQualityOfService
-        self.maxConcurrentOperationCount = downloaderConfiguration.downloadMaxConcurrentOperationCount
+        self.name = configuration.downloadQueueName
+        self.qualityOfService = configuration.downloadQueueQualityOfService
+        self.maxConcurrentOperationCount = configuration.downloadMaxConcurrentOperationCount
         self.isSuspended = true
     }
 
-    func configure(with downloaderConfiguration: DMSwiftConfiguration) {
+    /// Updates `Self` with a new configuration.
+    /// - Parameter downloaderConfiguration: A new configuration.
+    func update(with downloaderConfiguration: DMSwiftConfiguration) {
         self.urlSessionTaskType = downloaderConfiguration.urlSessionTaskType
         self.timeoutIntervalForRequest = downloaderConfiguration.timeoutIntervalForRequest
         self.name = downloaderConfiguration.downloadQueueName
@@ -67,7 +73,9 @@ class DownloadQueue: OperationQueue {
         self.maxConcurrentOperationCount = downloaderConfiguration.downloadMaxConcurrentOperationCount
     }
 
-    func configure(with fileStorage: FileStorage) {
+    /// Updates `FileStorage`.
+    /// - Parameter fileStorage: a new `FileStorage`
+    func update(with fileStorage: FileStorage) {
         self.fileStorage = fileStorage
     }
 
@@ -75,7 +83,7 @@ class DownloadQueue: OperationQueue {
     /// - Parameters:
     ///   - requests: The list of requests that are needed to create a list of download operations.
     ///   - completion: Completion handler that will be called where time when a download task will be finished.
-    func start(_ requests: [URLRequestTestable], completion: ((_ fileLocation: URL?, _ fromUrl: URL?, _ error: Error?) -> Void)? = nil) {
+    func start(_ requests: [URLRequestTestable], completion: ((_ fileData: DMSwiftTypealias.Download.FileData) -> Void)? = nil) {
 
         // suspend queue
         self.isSuspended = true
@@ -115,9 +123,10 @@ class DownloadQueue: OperationQueue {
 
         // if finishedOperation not nil
         if let finishedOperation = finishedOperation,
-            !self.operations.contains(finishedOperation) {
+            !isFinishedOperationAdded {
             // add finishedOperation to queue
             self.addOperation(finishedOperation)
+            self.isFinishedOperationAdded = true
         }
 
         // unsuspend
@@ -129,36 +138,38 @@ class DownloadQueue: OperationQueue {
     ///   - request: Request for remote file location to crate a download operation.
     ///   - delegate: Optional download delegate.
     ///   - completion: Completion handler that will be called where time when a download task will be finished.
-    private func addDownloadOperation(_ request: URLRequestTestable, delegate: DownloadDelegate? = nil, _ completion: ((_ fileLocation: URL?, _ url: URL?, _ error: Error?) -> Void)? = nil) -> Operation? {
+    private func addDownloadOperation(_ request: URLRequestTestable, delegate: DownloadDelegate? = nil, _ completion: ((_ fileData: DMSwiftTypealias.Download.FileData) -> Void)? = nil) -> Operation? {
 
         // no reason to go further if url is equal to nil))
         guard let url = request.url else { return nil }
 
         // creates download operation
-        let downloadOperation = DownloadOperation(request, fileStorage: fileStorage, delegate: nil, downloadType: urlSessionTaskType, timeoutIntervalForRequest: timeoutIntervalForRequest, { (fileLocation, _url, error) in
+        let downloadOperation = DownloadOperation(request, fileStorage: fileStorage, delegate: nil, downloadType: urlSessionTaskType, timeoutIntervalForRequest: timeoutIntervalForRequest, { [weak self] (fileLocation, _url, error) in
 
             // if has error
             if let error = error {
                 // adds failed task and incrases failed unit count.
-                self.failedTasks.append((url: url, error: error))
-                self.downloadProgress.failedUnitCount += 1
+                self?.failedTasks.append((url: url, error: error))
+                self?.downloadProgress.failedUnitCount += 1
             }
             else {
                 // increases successfully finished unit count.
-                self.downloadProgress.finishedUnitCount += 1
+                self?.downloadProgress.finishedUnitCount += 1
             }
 
-            // reports about progress update.
-            self.onTaskProgressUpdate?(self.downloadProgress)
+            // Informs about progress update.
+            if let downloadProgress = self?.downloadProgress {
+                self?.onTaskProgressUpdate?(downloadProgress)
+            }
 
             // call completion in main thread.
             DispatchQueue.main.async {
-                completion?(fileLocation, url, error)
+                completion?((fileLocation, url, error))
             }
         })
 
         // updates files total size.
-        downloadOperation.onReciveFileSize = { [weak self] fileSize in
+        downloadOperation.onReceiveFileSize = { [weak self] fileSize in
             guard let strongSelf = self else { return }
             strongSelf.downloadProgress.totalUnitFileSize += fileSize
             strongSelf.onDownloadProgressUpdate?(strongSelf.downloadProgress)
@@ -187,5 +198,6 @@ class DownloadQueue: OperationQueue {
         downloadProgress.reset()
         failedTasks.clear()
         finishedOperation = nil
+        isFinishedOperationAdded = false
     }
 }

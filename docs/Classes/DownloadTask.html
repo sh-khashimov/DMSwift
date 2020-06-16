@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DownloadTask Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/DownloadTask" class="dashAnchor"></a>
+    <a title="DownloadTask Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">DMSwift Docs</a> (72% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">DMSwift Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        DownloadTask Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/DMSwift.html">DMSwift</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DefaultOperation.html">DefaultOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DownloadOperation.html">DownloadOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DownloadQueue.html">DownloadQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DownloadTask.html">DownloadTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/GroupPostProcessingOperation.html">GroupPostProcessingOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Logger.html">Logger</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PostProcessQueue.html">PostProcessQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PostProcessingOperation.html">PostProcessingOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SynchronizedArray.html">SynchronizedArray</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SynchronizedDictionary.html">SynchronizedDictionary</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DownloadError.html">DownloadError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/FileStorageError.html">FileStorageError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/LogLevel.html">LogLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/URLSessionTaskType.html">URLSessionTaskType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/FileManager.html">FileManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/HTTPURLResponse.html">HTTPURLResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Operation.html">Operation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Operation/OperationState.html">– OperationState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URL.html">URL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLRequest.html">URLRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLResponse.html">URLResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLSession.html">URLSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLSessionDataTask.html">URLSessionDataTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/URLSessionTask.html">URLSessionTask</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/DMSwiftAPI.html">DMSwiftAPI</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DMSwiftConfiguration.html">DMSwiftConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DownloadDelegate.html">DownloadDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DownloadLogging.html">DownloadLogging</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DownloadableTask.html">DownloadableTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DownloaderProgressDelegate.html">DownloaderProgressDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileDownloadProgressCounting.html">FileDownloadProgressCounting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileReading.html">FileReading</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileStorageConfiguration.html">FileStorageConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileStorageLogging.html">FileStorageLogging</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileStorageManageable.html">FileStorageManageable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/FileWriting.html">FileWriting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Logging.html">Logging</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PostProcessDelegate.html">PostProcessDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PostProcessLogging.html">PostProcessLogging</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/PostProcessing.html">PostProcessing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TaskProgressCounting.html">TaskProgressCounting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/URLRequestTestable.html">URLRequestTestable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/URLSessionTaskTestable.html">URLSessionTaskTestable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/URLSessionTestable.html">URLSessionTestable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/URLTestable.html">URLTestable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DMSwiftTypealias/Download.html">– Download</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DMSwiftTypealias/Storage.html">– Storage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DMSwiftTypealias/PostProcess.html">– PostProcess</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultDMSwiftConfiguration.html">DefaultDMSwiftConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultFileStorageConfiguration.html">DefaultFileStorageConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DownloadTaskProgress.html">DownloadTaskProgress</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileAttributes.html">FileAttributes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FileStorage.html">FileStorage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Filespec.html">Filespec</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TaskProgress.html">TaskProgress</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/URLRequestWrapper.html">URLRequestWrapper</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>DownloadTask</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">DownloadTask</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt"><a href="../Protocols/DownloadableTask.html">DownloadableTask</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC8delegateAA0B8Delegate_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/delegate" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC8delegateAA0B8Delegate_pSgvp">delegate</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DownloadDelegate.html">DownloadDelegate</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP16onReciveFileSizeys5Int64VcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/onReciveFileSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP16onReciveFileSizeys5Int64VcSgvp">onReciveFileSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">onReciveFileSize</span><span class="p">:</span> <span class="p">((</span><span class="kt">Int64</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP16onUpdateProgressySf8progress_s5Int64V14downloadedSizeAG08receivedJ0AG04fileJ0t_tcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/onUpdateProgress" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP16onUpdateProgressySf8progress_s5Int64V14downloadedSizeAG08receivedJ0AG04fileJ0t_tcSgvp">onUpdateProgress</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">onUpdateProgress</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a></span><span class="o">.</span><span class="kt">Download</span><span class="o">.</span><span class="kt">ProgressData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP17completionHandlery10Foundation3URLVSg8location_AH3urls5Error_pSg5errort_tcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/completionHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP17completionHandlery10Foundation3URLVSg8location_AH3urls5Error_pSg5errort_tcSgvp">completionHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a></span><span class="o">.</span><span class="kt">Download</span><span class="o">.</span><span class="kt">FileData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC16onFileDataChangey10Foundation3URLVSg8location_SSSg8filenameAJ13fileExtensiont_tcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/onFileDataChange" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC16onFileDataChangey10Foundation3URLVSg8location_SSSg8filenameAJ13fileExtensiont_tcSgvp">onFileDataChange</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The file data saved.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">onFileDataChange</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a></span><span class="o">.</span><span class="kt">Download</span><span class="o">.</span><span class="kt">SavedFileData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP11fileStorageAA04FileE0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/fileStorage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP11fileStorageAA04FileE0VSgvp">fileStorage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">fileStorage</span><span class="p">:</span> <span class="kt"><a href="../Structs/FileStorage.html">FileStorage</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP8fileData10Foundation3URLVSg8location_SSSg8filenameAJ0D9ExtensiontSgvp"></a>
+                    <a name="//apple_ref/swift/Property/fileData" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP8fileData10Foundation3URLVSg8location_SSSg8filenameAJ0D9ExtensiontSgvp">fileData</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">fileData</span><span class="p">:</span> <span class="kt"><a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a></span><span class="o">.</span><span class="kt">Download</span><span class="o">.</span><span class="kt">SavedFileData</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC7sessionAA18URLSessionTestable_pSgvp"></a>
+                    <a name="//apple_ref/swift/Property/session" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC7sessionAA18URLSessionTestable_pSgvp">session</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">session</span><span class="p">:</span> <span class="kt"><a href="../Protocols/URLSessionTestable.html">URLSessionTestable</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift16DownloadableTaskP17totalBytesWrittens5Int64Vvp"></a>
+                    <a name="//apple_ref/swift/Property/totalBytesWritten" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift16DownloadableTaskP17totalBytesWrittens5Int64Vvp">totalBytesWritten</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">totalBytesWritten</span><span class="p">:</span> <span class="kt">Int64</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC12downloadTypeAA010URLSessioncE0Ovp"></a>
+                    <a name="//apple_ref/swift/Property/downloadType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC12downloadTypeAA010URLSessioncE0Ovp">downloadType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Download type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">downloadType</span><span class="p">:</span> <span class="kt"><a href="../Enums/URLSessionTaskType.html">URLSessionTaskType</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC8fileSizes5Int64Vvp"></a>
+                    <a name="//apple_ref/swift/Property/fileSize" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC8fileSizes5Int64Vvp">fileSize</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>File size.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">fileSize</span><span class="p">:</span> <span class="kt">Int64</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC_11fileStorage8delegate12downloadType25timeoutIntervalForRequest_AcA18URLRequestTestable_p_AA04FileE0VAA0B8Delegate_pSgAA010URLSessioncH0OSdy10Foundation3URLVSg8location_AR3urls5Error_pSg5errort_tcSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(_:fileStorage:delegate:downloadType:timeoutIntervalForRequest:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC_11fileStorage8delegate12downloadType25timeoutIntervalForRequest_AcA18URLRequestTestable_p_AA04FileE0VAA0B8Delegate_pSgAA010URLSessioncH0OSdy10Foundation3URLVSg8location_AR3urls5Error_pSg5errort_tcSgtcfc">init(_:fileStorage:delegate:downloadType:timeoutIntervalForRequest:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initiates with required parameters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Protocols/URLRequestTestable.html">URLRequestTestable</a></span><span class="p">,</span> <span class="nv">fileStorage</span><span class="p">:</span> <span class="kt"><a href="../Structs/FileStorage.html">FileStorage</a></span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DownloadDelegate.html">DownloadDelegate</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">downloadType</span><span class="p">:</span> <span class="kt"><a href="../Enums/URLSessionTaskType.html">URLSessionTaskType</a></span><span class="p">,</span> <span class="nv">timeoutIntervalForRequest</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">,</span>
+     <span class="n">_</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/DMSwiftTypealias.html">DMSwiftTypealias</a></span><span class="o">.</span><span class="kt">Download</span><span class="o">.</span><span class="kt">FileData</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Remote request to the file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileStorage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>File storage manager.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>delegate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Progress delegate.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>downloadType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Download type.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeoutIntervalForRequest</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Request timeout interval.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Complete handler.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC5startyyF"></a>
+                    <a name="//apple_ref/swift/Method/start()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC5startyyF">start()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts download task.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">start</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:7DMSwift12DownloadTaskC6cancelyyF"></a>
+                    <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:7DMSwift12DownloadTaskC6cancelyyF">cancel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Cancel download task.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Download%20Type%20==%20.downloadTask"></a>
+                <a name="//apple_ref/swift/Section/Download Type == .downloadTask" class="dashAnchor"></a>
+                <a href="#/Download%20Type%20==%20.downloadTask">
+                  <h3 class="section-name">Download Type == .downloadTask</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:downloadTask:didFinishDownloadingToURL:"></a>
+                    <a name="//apple_ref/swift/Method/urlSession(_:downloadTask:didFinishDownloadingTo:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:downloadTask:didFinishDownloadingToURL:">urlSession(_:downloadTask:didFinishDownloadingTo:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span><span class="p">,</span> <span class="nv">downloadTask</span><span class="p">:</span> <span class="kt">URLSessionDownloadTask</span><span class="p">,</span> <span class="n">didFinishDownloadingTo</span> <span class="nv">location</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:"></a>
+                    <a name="//apple_ref/swift/Method/urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:">urlSession(_:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span><span class="p">,</span> <span class="nv">downloadTask</span><span class="p">:</span> <span class="kt">URLSessionDownloadTask</span><span class="p">,</span> <span class="n">didWriteData</span> <span class="nv">bytesWritten</span><span class="p">:</span> <span class="kt">Int64</span><span class="p">,</span> <span class="nv">totalBytesWritten</span><span class="p">:</span> <span class="kt">Int64</span><span class="p">,</span> <span class="nv">totalBytesExpectedToWrite</span><span class="p">:</span> <span class="kt">Int64</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Download%20Type%20==%20.dataTask"></a>
+                <a name="//apple_ref/swift/Section/Download Type == .dataTask" class="dashAnchor"></a>
+                <a href="#/Download%20Type%20==%20.dataTask">
+                  <h3 class="section-name">Download Type == .dataTask</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:dataTask:didReceiveResponse:completionHandler:"></a>
+                    <a name="//apple_ref/swift/Method/urlSession(_:dataTask:didReceive:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:dataTask:didReceiveResponse:completionHandler:">urlSession(_:dataTask:didReceive:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span><span class="p">,</span> <span class="nv">dataTask</span><span class="p">:</span> <span class="kt">URLSessionDataTask</span><span class="p">,</span> <span class="n">didReceive</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URLSession</span><span class="o">.</span><span class="kt">ResponseDisposition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:dataTask:didReceiveData:"></a>
+                    <a name="//apple_ref/swift/Method/urlSession(_:dataTask:didReceive:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:dataTask:didReceiveData:">urlSession(_:dataTask:didReceive:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span><span class="p">,</span> <span class="nv">dataTask</span><span class="p">:</span> <span class="kt">URLSessionDataTask</span><span class="p">,</span> <span class="n">didReceive</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Download%20Type%20==%20.dataTask2"></a>
+                <a name="//apple_ref/swift/Section/Download Type == .dataTask" class="dashAnchor"></a>
+                <a href="#/Download%20Type%20==%20.dataTask2">
+                  <h3 class="section-name">Download Type == .dataTask</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:task:didCompleteWithError:"></a>
+                    <a name="//apple_ref/swift/Method/urlSession(_:task:didCompleteWithError:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@DMSwift@objc(cs)DownloadTask(im)URLSession:task:didCompleteWithError:">urlSession(_:task:didCompleteWithError:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">urlSession</span><span class="p">(</span><span class="n">_</span> <span class="nv">session</span><span class="p">:</span> <span class="kt">URLSession</span><span class="p">,</span> <span class="nv">task</span><span class="p">:</span> <span class="kt">URLSessionTask</span><span class="p">,</span> <span class="n">didCompleteWithError</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/sh-khashimov/DMSwift" target="_blank" rel="external">Sherzod Khashimov</a>. All rights reserved. (Last updated: 2020-06-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.12.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
