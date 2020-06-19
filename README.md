@@ -39,7 +39,7 @@ You can find <a href="https://sh-khashimov.github.io/DMSwift/" target="_blank">*
 ## Requirements
 
 
-| App name | Swif | Xcode | Platforms |
+| App version | Swift | Xcode | Platforms |
 |---|---|---|---|
 | current version | Swift 5.0 | Xcode 11 | iOS 8.0 / watchOS 2.0 / macOS 10.10 / tvOS 9.0 / Ubuntu |
 
