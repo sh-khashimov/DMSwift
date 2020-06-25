@@ -57,6 +57,11 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+
+## Inspiration
+
+- [WWDC 2015: Advanced NSOperations](https://developer.apple.com/videos/play/wwdc2015/226/)
+
 ## Author
 
 Sherzod Khashimov
