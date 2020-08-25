@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "DMSwift"
-  s.version      = "0.2"
+  s.version      = "0.2.0"
   s.summary      = "A Download Manager"
   s.description  = <<-DESC
     DMSwift provides a simple and efficient way to download files. It can simultaneously download a large number of files, monitors the progress of downloading,  concurrently post-process downloaded files, supports logging, has a flexible configuration and easy to use API.
